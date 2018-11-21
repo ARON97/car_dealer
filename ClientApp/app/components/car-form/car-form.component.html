@@ -1,0 +1,80 @@
+<ng2-toasty [position]="'top-right'"></ng2-toasty>
+<h1>New Vehicle</h1>
+<p>
+  <!-- Render the Car as JSON -->
+  {{ car | json }}
+</p>
+<form #f="ngForm" (ngSubmit)="submit()" novalidate>
+  <!-- Make -->
+  <div class="form-group">
+    <!-- Make name -->
+    <label for="make">Make</label>
+    <!-- Drop-down list -->
+    <select id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="car.makeId" 
+        name="makeId" required #make="ngModel">
+        <!-- Input blank until the user clicks on the dropdown -->
+        <option value=""></option>
+        <!-- Populating the dropdown list -->
+        <option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
+    </select>
+    <!-- render error message -->
+    <div class="alert alert-danger" *ngIf="make.touched && !make.valid">Please specify the make.</div>
+  </div>
+  <!-- Model -->
+  <div class="form-group">
+    <!-- Model name -->
+    <label for="model">Model</label>
+    <!-- Drop-down list -->
+    <select id="model" class="form-control" [(ngModel)]="car.modelId" name="modelId" required #model="ngModel">
+      <option value=""></option>
+      <option *ngFor="let m of models" value="{{ m.id }}">{{ m.name }}</option>
+    </select>
+    <!-- render error message -->
+    <div class="alert alert-danger" *ngIf="model.touched && !model.valid">Please specify the model.</div>
+  </div>
+  <p>Is this car registered?</p>
+  <!-- Radio Buttons -->
+  <!-- Yes Radio Button -->
+  <div class="radio">
+    <label for="registered">
+      <input type="radio" name="isRegistered" id="registered" [value]="true" [(ngModel)]="car.isRegistered"> Yes
+    </label>
+  </div>
+  <!-- No Radio Button -->
+  <div class="radio">
+      <label for="notRegistered">
+        <input type="radio" name="isRegistered" id="notRegistered" [value]="false" [(ngModel)]="car.isRegistered"> No
+      </label>
+    </div>
+  <!-- Feature checkboxes -->
+  <h2>Features</h2>
+  <div *ngFor="let f of features" class="checkbox">
+    <label for="feature{{ f.id }}">
+      <input type="checkbox" id="feature{{ f.id }}" (change)="onFeatureToggle(f.id, $event)" [checked]="car.features.includes(f.id)"> {{ f.name }}
+    </label>
+  </div>
+  <h2>Contact</h2>
+  <!-- Contact name -->
+  <div class="form-group">
+    <label for="contactName">Name</label>
+    <input id="contactName" type="text" class="form-control" [(ngModel)]="car.contact.name" 
+            name="contactName" required #contactName="ngModel">
+    <!-- error message -->
+    <div class="alert alert-danger" *ngIf="contactName.touched && !contactName.valid">Please specify the make.</div>
+  </div>
+  <!-- Contact phone -->
+  <div class="form-group">
+    <label for="contactPhone">Phone</label>
+    <input id="contactPhone" type="text" class="form-control" [(ngModel)]="car.contact.phone" 
+            name="contactPhone" required #contactPhone="ngModel">
+      <!-- error message -->
+      <div class="alert alert-danger" *ngIf="contactPhone.touched && !contactPhone.valid">Please specify the make.</div>
+  </div>
+  <!-- Contact email -->
+  <div class="form-group">
+    <label for="contactEmail">Email</label>
+    <input id="contactEmail" type="text" class="form-control" [(ngModel)]="car.contact.email" name="contactEmail">
+  </div>
+  <!-- Save Button -->
+  <button class="btn btn-primary">Save</button>
+</form>  

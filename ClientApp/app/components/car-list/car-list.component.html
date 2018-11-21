@@ -1,0 +1,52 @@
+<h2>Cars</h2>
+<p>
+  <a [routerLink]="['/cars/new']" class="btn btn-primary">New Car</a>
+</p>
+
+<div class="well">
+  <!-- Add the Filter -->
+  <div class="form-group">
+    <label for="make">Make</label>
+    <select id="make" class="form-control" [(ngModel)]="query.makeId" (change)="onFilterChange()">
+      <option value=""></option>
+      <!-- displaying the id and name -->
+      <option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
+    </select>
+  </div>
+  <!-- Button to reset filters -->
+  <button class="btn btn-default" (click)="clearFilter()">Reset</button>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th *ngFor="let r of columns">
+        <!-- columns that are sortable -->
+        <div *ngIf="r.isSortable" (click)="sortBy(r.key)">
+          {{ r.title }}
+          <i *ngIf="query.sortBy === r.key" 
+            class="fa"
+            [class.fa-sort-asc]="query.isSortAscending"
+            [class.fa-sort-desc]="!query.isSortAscending"
+          ></i>
+        </div>
+        <!-- columns that are not sortable -->
+        <div *ngIf="!r.isSortable">
+          {{ r.title }}
+        </div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of queryResult.items">
+      <td>{{ c.id }}</td>
+      <td>{{ c.make.name }}</td>
+      <td>{{ c.model.name }}</td>
+      <td>{{ c.contact.name }}</td>
+      <td>
+        <a [routerLink]="['/cars/', c.id]">View</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Pagination component -->
+<pagination [total-items]="queryResult.totalItems" [page-size]="query.pageSize" (page-changed)="onPageChange($event)"></pagination>

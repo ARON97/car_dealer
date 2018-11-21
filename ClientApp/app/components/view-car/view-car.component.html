@@ -1,0 +1,54 @@
+<h1>Car</h1>
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#basic" aria-controls="basic" role="tab" data-toggle="tab">Car</a></li>
+    <li role="presentation"><a href="#photos" aria-controls="photos" role="tab" data-toggle="tab">Photos</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content" *ngIf="car">
+    <!-- Cars tab -->
+    <div role="tabpanel" class="tab-pane active" id="basic">
+      <h2>Basics</h2>
+      <ul>
+        <li>Make: {{ car.make.name }}</li>
+        <li>Model: {{ car.model.name }}</li>
+        <li>Registered: {{ car.isRegistered ? 'Yes' : 'No' }}
+      </ul>
+      <h2>Features</h2>
+      <ul>
+        <li *ngFor="let f of car.features">{{ f.name }}</li>
+      </ul>
+      <h2>Contact</h2>
+      <ul>
+        <li>Contact Name: {{ car.contact.name }}</li>
+        <li>Contact Phone: {{ car.contact.phone }}</li>
+        <li>Contact Email: {{ car.contact.email }}</li>
+      </ul>
+      <br/>
+      <p>
+        <a class="btn btn-primary" [routerLink]="['/cars/edit/', car.id]">Edit</a>
+        <button class="btn btn-danger" (click)="delete()">Delete</button>
+        <a class="btn btn-default" [routerLink]="['/cars']">View All Cars</a>
+      </p>
+    </div>
+    <!-- Photos tab -->
+    <div role="tabpanel" class="tab-pane" id="photos">
+      <h2>Photos</h2>
+      <input type="file" (change)="uploadPhoto()" #fileInput>
+      <!-- Progress Bar -->
+      <div class="progress" *ngIf="progress && progress.percentage < 100">
+        <div class="progress-bar" [style.width]="progress.percentage + '%'">
+          <span class="sr-only">
+              {{ progress.percentage }}% Complete
+          </span>
+        </div>
+      </div>
+      <!-- Image -->
+      <img *ngFor="let photo of photos" src="/upload/{{ photo.fileName }}" class="img-thumbnail">
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,10 @@
+C:\Users\Aron\cars\bin\Debug\netcoreapp2.0\cars.deps.json
+C:\Users\Aron\cars\bin\Debug\netcoreapp2.0\cars.runtimeconfig.json
+C:\Users\Aron\cars\bin\Debug\netcoreapp2.0\cars.runtimeconfig.dev.json
+C:\Users\Aron\cars\bin\Debug\netcoreapp2.0\cars.dll
+C:\Users\Aron\cars\bin\Debug\netcoreapp2.0\cars.pdb
+C:\Users\Aron\cars\obj\Debug\netcoreapp2.0\cars.csproj.CoreCompileInputs.cache
+C:\Users\Aron\cars\obj\Debug\netcoreapp2.0\cars.AssemblyInfoInputs.cache
+C:\Users\Aron\cars\obj\Debug\netcoreapp2.0\cars.AssemblyInfo.cs
+C:\Users\Aron\cars\obj\Debug\netcoreapp2.0\cars.dll
+C:\Users\Aron\cars\obj\Debug\netcoreapp2.0\cars.pdb
